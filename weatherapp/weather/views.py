@@ -6,7 +6,7 @@ import urllib.request
 def index(request):
     if request.method == 'POST':
         city = request.POST['city']
-        api_key = '3110f5fc0c6dfd3116a7403799ff0b43'
+        api_key = your_api_key
         url = f'http://api.openweathermap.org/data/2.5/weather?q={city}&APPID={api_key}'
         res = urllib.request.urlopen(url).read()
 
