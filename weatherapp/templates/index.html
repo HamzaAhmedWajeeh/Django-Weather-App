@@ -3,31 +3,97 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Weather</title>
-  <!-- Latest compiled and minified CSS -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Weather Detector</title>
+
+  <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(to right, #4facfe, #00f2fe);
+      color: white;
+      padding: 20px;
+    }
+
+    nav {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 15px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    nav h1 {
+      font-size: 40px;
+      margin: 0;
+    }
+
+    .form-control {
+      height: 50px;
+      font-size: 18px;
+      border-radius: 25px 0 0 25px;
+    }
+
+    .input-group-btn .btn {
+      height: 50px;
+      font-size: 18px;
+      border-radius: 0 25px 25px 0;
+      background-color: #fff;
+      color: #007BFF;
+      border: none;
+    }
+
+    .input-group-btn .btn:hover {
+      background-color: #007BFF;
+      color: white;
+    }
+
+    .weather-card {
+      background-color: #2438bd;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+      margin-top: 20px;
+    }
+
+    h1, h3, h5 {
+      margin-bottom: 10px;
+    }
+
+    .icon {
+      font-size: 100px;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .form-control, .btn {
+        font-size: 16px;
+      }
+    }
+  </style>
 
   <!-- jQuery library -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-  <!-- Latest compiled JavaScript -->
+  <!-- Bootstrap JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
 </head>
 
 <body>
-  <nav class="row" style="background: grey; color: white;">
-    <div class="col-md-12 text-center">
-      <h1>Weather Detector</h1>
-    </div>
+
+  <nav class="text-center">
+    <h1>Weather Detector</h1>
   </nav>
-  <br />
-  <br />
+
   <div class="row">
     <div class="col-md-6 col-md-offset-3 text-center">
       <form action="" method="post" class="input-group">
         {% csrf_token %}
-        <input type="text" class="form-control" name="city" placeholder="Search">
+        <input type="text" class="form-control" name="city" placeholder="Search for a city">
         <div class="input-group-btn">
           <button class="btn btn-default" type="submit">
             <i class="glyphicon glyphicon-search"></i>
@@ -36,18 +102,24 @@
       </form>
     </div>
   </div>
-  <div class="row">
+
+  <div class="row oho">
     {% if data.country_code %}
-    <div class="col-md-6 col-md-offset-3 text-center">
+    <div class="col-md-6 col-md-offset-3 text-center weather-card">
+      <!-- Add a placeholder for weather icon -->
+      <div class="icon">
+        <i class="glyphicon glyphicon-cloud"></i> <!-- Placeholder icon, replace with dynamic weather icons -->
+      </div>
       <h1>{{ city }}</h1>
       <h3>Country Code: {{ data.country_code }}</h3>
-      <h5>Coordinate: {{ data.coordinate }}</h5>
-      <h5>Temperature: {{ data.temp }}</h5>
-      <h5>Pressure: {{ data.pressure }} </h5>
-      <h5>Humidity: {{ data.humidity }}</h5>
+      <h5>Coordinates: {{ data.coordinate }}</h5>
+      <h5>Temperature: {{ data.temp }} °C</h5>
+      <h5>Pressure: {{ data.pressure }} hPa</h5>
+      <h5>Humidity: {{ data.humidity }}%</h5>
     </div>
     {% endif %}
   </div>
+
 </body>
 
 </html>
